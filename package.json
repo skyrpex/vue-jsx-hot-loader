@@ -20,7 +20,6 @@
   "author": "cristian@pallares.io",
   "license": "MIT",
   "dependencies": {
-    "modernizr": "^3.3.1"
   },
   "devDependencies": {
     "babel-cli": "^6.14.0",
