@@ -1,7 +1,14 @@
+import path from 'path';
+import hash from 'hash-sum';
+
 export default function (output) {
   if (typeof this.cacheable === 'function') {
     this.cacheable();
   }
+
+  const moduleId = `_vue_jsx-${hash(this.resourcePath)}`;
+  const fileName = path.basename(this.resourcePath);
+  const hotId = JSON.stringify(`${moduleId}/${fileName}`);
 
   return `
     ${output}
@@ -22,9 +29,9 @@ export default function (output) {
       }
 
       if (!module.hot.data) {
-        api.createRecord('very-unique-id', module.exports);
+        api.createRecord(${hotId}, module.exports);
       } else {
-        api.rerender('very-unique-id', module.exports);
+        api.rerender(${hotId}, module.exports);
       }
     }
   `;
