@@ -15,11 +15,10 @@ export default function (output) {
 
     if (module.hot) {
       const api = require('vue-hot-reload-api')
-      const Vue = require('vue');
 
       // make the API aware of the Vue that you are using.
       // also checks compatibility.
-      api.install(Vue);
+      api.install(require('vue'), false);
 
       // compatibility can be checked via api.compatible after installation
       if (!api.compatible) {
@@ -28,10 +27,12 @@ export default function (output) {
         );
       }
 
+      module.hot.accept();
+
       if (!module.hot.data) {
-        api.createRecord(${hotId}, module.exports);
+        api.createRecord(${hotId}, module.exports.default);
       } else {
-        api.rerender(${hotId}, module.exports);
+        api.rerender(${hotId}, module.exports.default);
       }
     }
   `;
