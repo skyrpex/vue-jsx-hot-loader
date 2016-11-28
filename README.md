@@ -28,11 +28,12 @@ export default {
       // Place the vue-jsx-loader before the babel-loader
       {
         test: /jsx$/,
-        loader: '@skyrpex/vue-jsx',
+        loader: 'babel-loader!@skyrpex/vue-jsx-loader',
       },
+      // This is not required, but be sure to not parse JSX files with Babel twice
       {
-        test: /jsx?$/,
-        loader: 'babel',
+        test: /js$/,
+        loader: 'babel-loader',
       },
     ],
   },
