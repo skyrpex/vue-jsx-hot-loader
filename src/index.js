@@ -14,7 +14,7 @@ export default function (output) {
     ${output}
 
     if (module.hot) {
-      const api = require('vue-hot-reload-api')
+      var api = require('vue-hot-reload-api')
 
       // make the API aware of the Vue that you are using.
       // also checks compatibility.
