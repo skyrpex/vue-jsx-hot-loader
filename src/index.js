@@ -30,10 +30,13 @@ export default function (output) {
 
         module.hot.accept();
 
+        // Retrieve the exported component. Handle ES and CJS modules.
+        var component = module.exports.__esModule ? module.exports.default : module.eexports;
+
         if (!module.hot.data) {
-          api.createRecord(${hotId}, module.exports.default);
+          api.createRecord(${hotId}, component);
         } else {
-          api.rerender(${hotId}, module.exports.default);
+          api.rerender(${hotId}, component);
         }
       })();
     }
