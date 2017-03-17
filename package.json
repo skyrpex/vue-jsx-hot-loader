@@ -1,5 +1,5 @@
 {
-  "name": "@skyrpex/vue-jsx-loader",
+  "name": "vue-jsx-hot-loader",
   "description": "Webpack loader for Vue.js components with JSX render functions",
   "version": "0.0.1-5",
   "publishConfig": {
