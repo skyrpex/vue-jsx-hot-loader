@@ -31,7 +31,7 @@ export default function (output) {
         module.hot.accept();
 
         // Retrieve the exported component. Handle ES and CJS modules.
-        var component = module.exports.__esModule ? module.exports.default : module.eexports;
+        var component = module.exports.__esModule ? module.exports.default : module.exports;
 
         if (!module.hot.data) {
           api.createRecord(${hotId}, component);
