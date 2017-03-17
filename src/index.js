@@ -6,7 +6,7 @@ export default function (output) {
     this.cacheable();
   }
 
-  const moduleId = `_vue_jsx-${hash(this.resourcePath)}`;
+  const moduleId = `_vue_jsx_hot-${hash(this.resourcePath)}`;
   const fileName = path.basename(this.resourcePath);
   const hotId = JSON.stringify(`${moduleId}/${fileName}`);
 
