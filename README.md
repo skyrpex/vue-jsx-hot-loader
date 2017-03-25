@@ -1,10 +1,14 @@
-# Vue JSX Webpack loader
+# vue-jsx-hot-loader
 
-This loader will allow to use JSX render functions along with HMR. Beware, it may have bugs.
+> Vue.js v2 JSX component hot loader for [Webpack](http://webpack.js.org/).
+
+This loader will enable Hot Module Replacement when using Vue 2 JSX render functions.
+
+*NOTE: This plugin is still an experiment*
 
 ## Installation
 
-`npm install @skyrpex/vue-jsx-loader`
+`npm install @skyrpex/vue-jsx-hot-loader`
 
 ## Usage
 
@@ -25,15 +29,18 @@ export default {
   // ...
   module: {
     loaders: [
-      // Place the vue-jsx-loader before the babel-loader
+      // Enable HMR for JSX.
       {
-        test: /jsx$/,
-        loader: 'babel-loader!@skyrpex/vue-jsx-loader',
+        test: /\.jsx$/,
+        use: [
+          'babel-loader',
+          '@skyrpex/vue-jsx-hot-loader',
+        ],
       },
-      // This is not required, but be sure to not parse JSX files with Babel twice
+      // Remember to use babel on the rest of the JS files.
       {
-        test: /js$/,
-        loader: 'babel-loader',
+        test: /\.js$/,
+        use: 'babel-loader',
       },
     ],
   },
