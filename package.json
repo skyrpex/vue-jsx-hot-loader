@@ -15,8 +15,10 @@
   },
   "keywords": [
     "webpack",
+    "vue",
     "loader",
-    "jsx"
+    "jsx",
+    "hot"
   ],
   "author": "cristian@pallares.io",
   "license": "MIT",
