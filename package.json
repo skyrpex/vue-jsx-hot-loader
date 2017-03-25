@@ -10,7 +10,7 @@
     "prepublish": "npm run build",
     "start": "npm run build -- --watch",
     "build": "babel src --out-dir lib",
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test:playground": "webpack-dev-server --config tests/webpack/webpack.config.js --hot --inline",
     "publish/beta": "np prerelease --skip-cleanup --yolo --tag=beta"
   },
   "keywords": [
