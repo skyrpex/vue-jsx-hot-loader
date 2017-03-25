@@ -20,6 +20,10 @@
     "jsx",
     "hot"
   ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/skyrpex/vue-jsx-hot-loader.git"
+  },
   "author": "cristian@pallares.io",
   "license": "MIT",
   "dependencies": {
