@@ -1,14 +1,17 @@
 # vue-jsx-hot-loader
 
-> Vue.js v2 JSX component hot loader for [Webpack](http://webpack.js.org/).
+> Works with:
+>
+> ![Vue 2](https://img.shields.io/badge/vue-%5E2.0-green.svg)
+> ![Webpack](https://img.shields.io/badge/webpack-%5E2.0-green.svg)
 
-This loader will enable Hot Module Replacement when using Vue 2 JSX render functions.
+This loader will enable `Hot Module Replacement` for [Webpack](http://webpack.js.org/) when using Vue's JSX render functions.
 
-*NOTE: This plugin is still an experiment*
+*NOTE: This plugin is still an experiment.*
 
 ## Installation
 
-`npm install @skyrpex/vue-jsx-hot-loader`
+`npm install vue-jsx-hot-loader`
 
 ## Usage
 
