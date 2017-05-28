@@ -37,7 +37,7 @@ export default {
         test: /\.jsx$/,
         use: [
           'babel-loader',
-          '@skyrpex/vue-jsx-hot-loader',
+          'vue-jsx-hot-loader',
         ],
       },
       // Remember to use babel on the rest of the JS files.
