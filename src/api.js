@@ -23,9 +23,16 @@ export default ({ module, hotId }) => {
   // Accept the hot replacement.
   module.hot.accept();
 
-  // Retrieve the exported component. Handle ES and CJS modules.
-  // eslint-disable-next-line no-underscore-dangle
-  const component = module.exports.__esModule ? module.exports.default : module.exports;
+  // Retrieve the exported component. Handle ES and CJS modules as well as
+  // untransformed ES modules (env/es2015 preset with modules: false).
+  let component;
+  if (!module.exports) { // babel did not transform modules
+    // eslint-disable-next-line no-underscore-dangle
+    component = module.__esModule ? module.default : module;
+  } else {
+    // eslint-disable-next-line no-underscore-dangle
+    component = module.exports.__esModule ? module.exports.default : module.exports;
+  }
 
   // Serialize everything but the render function.
   // We'll use it to decide if we need to reload or rerender.
