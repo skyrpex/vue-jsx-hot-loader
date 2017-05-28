@@ -1,5 +1,3 @@
-import NativeModule from './nativeModules/component.jsx';
-
 export default {
   name: 'MyJsxComponent',
   data() {
@@ -23,9 +21,9 @@ export default {
   // eslint-disable-next-line no-unused-vars
   render(h) {
     return <div>
+      <br /><strong>Native module, untransformed by babel</strong><br />
       <span>Hello, {this.name}!!</span>
       <button onClick={this.toggleName}>Toggle!!</button>
-      <NativeModule />
     </div>;
   },
 };
