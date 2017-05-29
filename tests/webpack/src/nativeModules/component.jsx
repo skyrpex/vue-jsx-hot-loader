@@ -1,5 +1,5 @@
 export default {
-  name: 'MyJsxComponent',
+  name: 'MyNativeJsxComponent',
   data() {
     return {
       name: 'world',
