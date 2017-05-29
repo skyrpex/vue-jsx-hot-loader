@@ -1,5 +1,5 @@
 export default {
-  name: 'MyNativeEsModuleJsxComponent',
+  name: 'MyNativeJsxComponent',
   data() {
     return {
       greeting: 'Hello',
