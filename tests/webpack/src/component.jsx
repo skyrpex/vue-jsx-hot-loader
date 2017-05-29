@@ -23,7 +23,7 @@ export default {
   // eslint-disable-next-line no-unused-vars
   render(h) {
     return <div>
-      <span>Hello, {this.name}!!</span>
+      <span>(cjs) Hello, {this.name}!!</span>
       <button onClick={this.toggleName}>Toggle!!</button>
       <NativeModule />
     </div>;
