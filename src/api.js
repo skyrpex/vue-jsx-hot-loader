@@ -8,7 +8,7 @@ import { omit } from 'lodash';
 // a reload or just a rerender is needed.
 const cache = {};
 
-export default ({ module, hotId }) => {
+export default ({ ctx, module, hotId }) => {
   // Make the API aware of the Vue that you are using.
   // Also checks compatibility.
   api.install(Vue, false);
@@ -28,7 +28,7 @@ export default ({ module, hotId }) => {
   let component;
   if (!module.exports) { // babel did not transform modules
     // eslint-disable-next-line no-underscore-dangle
-    component = module.__esModule ? module.default : module;
+    component = ctx.__esModule ? ctx.default : ctx;
   } else {
     // eslint-disable-next-line no-underscore-dangle
     component = module.exports.__esModule ? module.exports.default : module.exports;
