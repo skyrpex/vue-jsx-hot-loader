@@ -1,3 +1,5 @@
+import Button from './Button.jsx'
+
 export default {
   name: 'MyNativeJsxComponent',
   data() {
@@ -10,11 +12,10 @@ export default {
       this.greeting = this.greeting === 'Hello' ? 'Salut' : 'Hello';
     },
   },
-  // eslint-disable-next-line no-unused-vars
-  render(h) {
+  render() {
     return <div>
       <span>(esm) {this.greeting}, world!!</span>
-      <button onClick={this.toggleName}>Toggle!!</button>
+      <Button onClick={this.toggleName}>Toggle!</Button>
     </div>;
   },
 };

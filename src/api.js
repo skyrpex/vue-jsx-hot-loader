@@ -28,7 +28,7 @@ export default ({ ctx, module, hotId }) => {
   let component;
   if (!module.exports) { // babel did not transform modules
     // eslint-disable-next-line no-underscore-dangle
-    component = ctx.__esModule ? ctx.default : ctx;
+    component = ctx.__esModule ? ctx.default : ctx.a;
   } else {
     // eslint-disable-next-line no-underscore-dangle
     component = module.exports.__esModule ? module.exports.default : module.exports;
