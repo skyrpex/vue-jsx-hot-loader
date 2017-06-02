@@ -2,6 +2,12 @@ import Button from './Button.jsx'
 
 export default {
   name: 'MyNativeJsxComponent',
+  props: {
+    disabled: {
+      type: Boolean,
+      default: false,
+    },
+  },
   data() {
     return {
       greeting: 'Hello',

@@ -1,12 +1,26 @@
 import Vue from 'vue';
+import _ from 'lodash';
 import api from 'vue-hot-reload-api';
 import serialize from 'serialize-javascript';
-import { omit } from 'lodash';
 
 // We'll store here the serialized components.
 // The cache will be used to decide whenever
 // a reload or just a rerender is needed.
 const cache = {};
+
+// Native objects aren't serializable by the 'serialize-javascript' package,
+// so we'll just transform it to strings.
+const transformUnserializableProps = (item) => {
+  if (_.isNative(item)) {
+    return item.toString();
+  }
+
+  if (_.isObject(item) || _.isArray(item)) {
+    return _.mapValues(item, transformUnserializableProps);
+  }
+
+  return item;
+};
 
 export default ({ ctx, module, hotId }) => {
   // Make the API aware of the Vue that you are using.
@@ -36,7 +50,10 @@ export default ({ ctx, module, hotId }) => {
 
   // Serialize everything but the render function.
   // We'll use it to decide if we need to reload or rerender.
-  const serialized = serialize(omit(component, ['render']), { space: 0 });
+  const serialized = serialize(
+    transformUnserializableProps(_.omit(component, ['render'])),
+    { space: 0 },
+  );
 
   if (!module.hot.data) {
     // If no data, we need to create the record.

@@ -3,6 +3,11 @@ import NativeModule from './nativeModules/component.jsx';
 
 export default {
   name: 'MyJsxComponent',
+  props: {
+    myProp: {
+      type: Object,
+    },
+  },
   data() {
     return {
       name: 'world',
