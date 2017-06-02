@@ -12,5 +12,5 @@ export default function (output) {
   const fileName = path.basename(this.resourcePath);
   const hotId = JSON.stringify(`${moduleId}/${fileName}`);
 
-  return `${output} if (module.hot) require(${api})({ ctx: this, module: module, hotId: ${hotId} });`;
+  return `${output} if (module.hot) require(${api}).default({ ctx: this, module: module, hotId: ${hotId} });`;
 }

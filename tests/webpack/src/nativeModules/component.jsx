@@ -1,11 +1,11 @@
-import Button from './Button.jsx'
+import Button from './button.jsx';
 
 export default {
   name: 'MyNativeJsxComponent',
   props: {
     disabled: {
       type: Boolean,
-      default: false,
+      default: true,
     },
   },
   data() {
@@ -21,7 +21,7 @@ export default {
   render() {
     return <div>
       <span>(esm) {this.greeting}, world!!</span>
-      <Button onClick={this.toggleName}>Toggle!</Button>
+      <Button disabled={this.disabled} onClick={this.toggleName}>Toggle!</Button>
     </div>;
   },
 };
