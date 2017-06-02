@@ -6,6 +6,7 @@ export default {
   props: {
     myProp: {
       type: Object,
+      default: () => ({}),
     },
   },
   data() {
