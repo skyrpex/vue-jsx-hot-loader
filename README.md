@@ -1,5 +1,7 @@
 # vue-jsx-hot-loader
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/skyrpex/vue-jsx-hot-loader.svg)](https://greenkeeper.io/)
+
 > Works with:
 >
 > ![Vue 2](https://img.shields.io/badge/vue-%5E2.0-green.svg)
