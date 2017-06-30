@@ -8,6 +8,9 @@ const serialize = require('serialize-javascript');
 // a reload or just a rerender is needed.
 const cache = {};
 
+// https://github.com/yahoo/serialize-javascript/blob/adfee60681dd02b0c4ec73793ad4bb39bbff46ef/index.js#L15
+const IS_NATIVE_CODE_REGEXP = /\{\s*\[native code\]\s*\}/g;
+
 // Native objects aren't serializable by the 'serialize-javascript' package,
 // so we'll just transform it to strings.
 const transformUnserializableProps = (item) => {
@@ -15,8 +18,9 @@ const transformUnserializableProps = (item) => {
     return _.mapValues(item, transformUnserializableProps);
   }
 
-  if (item.toString) {
-    return item.toString();
+  const serializedItem = item.toString();
+  if (IS_NATIVE_CODE_REGEXP.test(serializedItem)) {
+    return serializedItem;
   }
 
   return item;
