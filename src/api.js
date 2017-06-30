@@ -11,12 +11,12 @@ const cache = {};
 // Native objects aren't serializable by the 'serialize-javascript' package,
 // so we'll just transform it to strings.
 const transformUnserializableProps = (item) => {
-  if (_.isNative(item)) {
-    return item.toString();
-  }
-
   if (_.isObject(item) || _.isArray(item)) {
     return _.mapValues(item, transformUnserializableProps);
+  }
+
+  if (item.toString) {
+    return item.toString();
   }
 
   return item;
