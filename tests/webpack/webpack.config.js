@@ -9,7 +9,7 @@ module.exports = {
         test: /\.jsx$/,
         use: [
           'babel-loader',
-          require.resolve('../../lib/index'),
+          require.resolve('../../src/index'),
         ],
       },
       {

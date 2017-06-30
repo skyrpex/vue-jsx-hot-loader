@@ -1,7 +1,7 @@
-import Vue from 'vue';
-import _ from 'lodash';
-import api from 'vue-hot-reload-api';
-import serialize from 'serialize-javascript';
+const Vue = require('vue');
+const _ = require('lodash');
+const api = require('vue-hot-reload-api');
+const serialize = require('serialize-javascript');
 
 // We'll store here the serialized components.
 // The cache will be used to decide whenever
@@ -22,7 +22,18 @@ const transformUnserializableProps = (item) => {
   return item;
 };
 
-export default ({ ctx, module, hotId }) => {
+const findComponent = ({ ctx, module }) => {
+  // Babel did not transform modules
+  if (!module.exports) {
+    // eslint-disable-next-line no-underscore-dangle
+    return ctx.__esModule ? ctx.default : ctx.a;
+  }
+
+  // eslint-disable-next-line no-underscore-dangle
+  return module.exports.__esModule ? module.exports.default : module.exports;
+};
+
+module.exports = ({ ctx, module, hotId }) => {
   // Make the API aware of the Vue that you are using.
   // Also checks compatibility.
   api.install(Vue, false);
@@ -39,14 +50,7 @@ export default ({ ctx, module, hotId }) => {
 
   // Retrieve the exported component. Handle ES and CJS modules as well as
   // untransformed ES modules (env/es2015 preset with modules: false).
-  let component;
-  if (!module.exports) { // babel did not transform modules
-    // eslint-disable-next-line no-underscore-dangle
-    component = ctx.__esModule ? ctx.default : ctx.a;
-  } else {
-    // eslint-disable-next-line no-underscore-dangle
-    component = module.exports.__esModule ? module.exports.default : module.exports;
-  }
+  const component = findComponent({ ctx, module });
 
   // Serialize everything but the render function.
   // We'll use it to decide if we need to reload or rerender.
