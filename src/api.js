@@ -1,28 +1,55 @@
-import Vue from 'vue';
-import _ from 'lodash';
-import api from 'vue-hot-reload-api';
-import serialize from 'serialize-javascript';
+const Vue = require('vue');
+const _ = require('lodash');
+const api = require('vue-hot-reload-api');
+const serialize = require('serialize-javascript');
 
 // We'll store here the serialized components.
 // The cache will be used to decide whenever
 // a reload or just a rerender is needed.
 const cache = {};
 
+// https://github.com/yahoo/serialize-javascript/blob/adfee60681dd02b0c4ec73793ad4bb39bbff46ef/index.js#L15
+const IS_NATIVE_CODE_REGEXP = /\{\s*\[native code\]\s*\}/g;
+
 // Native objects aren't serializable by the 'serialize-javascript' package,
 // so we'll just transform it to strings.
-const transformUnserializableProps = (item) => {
-  if (_.isNative(item)) {
-    return item.toString();
+//
+// We'll use a local cache to ignore prevent transforming cyclic objects.
+const transformUnserializableProps = (item, localCache = null) => {
+  if (localCache == null) {
+    // eslint-disable-next-line no-param-reassign
+    localCache = [];
+  } else if (_.indexOf(localCache, item) !== -1) {
+    return null;
   }
 
   if (_.isObject(item) || _.isArray(item)) {
-    return _.mapValues(item, transformUnserializableProps);
+    localCache.push(item);
+    return _.mapValues(item, value => transformUnserializableProps(value, localCache));
+  }
+
+  if (item) {
+    const serializedItem = item.toString();
+    if (IS_NATIVE_CODE_REGEXP.test(serializedItem)) {
+      return serializedItem;
+    }
   }
 
   return item;
 };
 
-export default ({ ctx, module, hotId }) => {
+const findComponent = ({ ctx, module }) => {
+  // Babel did not transform modules
+  if (!module.exports) {
+    // eslint-disable-next-line no-underscore-dangle
+    return ctx.__esModule ? ctx.default : ctx.a;
+  }
+
+  // eslint-disable-next-line no-underscore-dangle
+  return module.exports.__esModule ? module.exports.default : module.exports;
+};
+
+module.exports = ({ ctx, module, hotId }) => {
   // Make the API aware of the Vue that you are using.
   // Also checks compatibility.
   api.install(Vue, false);
@@ -39,14 +66,7 @@ export default ({ ctx, module, hotId }) => {
 
   // Retrieve the exported component. Handle ES and CJS modules as well as
   // untransformed ES modules (env/es2015 preset with modules: false).
-  let component;
-  if (!module.exports) { // babel did not transform modules
-    // eslint-disable-next-line no-underscore-dangle
-    component = ctx.__esModule ? ctx.default : ctx.a;
-  } else {
-    // eslint-disable-next-line no-underscore-dangle
-    component = module.exports.__esModule ? module.exports.default : module.exports;
-  }
+  const component = findComponent({ ctx, module });
 
   // Serialize everything but the render function.
   // We'll use it to decide if we need to reload or rerender.

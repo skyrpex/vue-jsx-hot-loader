@@ -1,8 +1,9 @@
-import path from 'path';
-import hash from 'hash-sum';
+const _ = require('lodash');
+const path = require('path');
+const hash = require('hash-sum');
 
-export default function (output) {
-  if (typeof this.cacheable === 'function') {
+module.exports = function vueJsxHotLoader(output) {
+  if (_.isFunction(this.cacheable)) {
     this.cacheable();
   }
 
@@ -12,5 +13,5 @@ export default function (output) {
   const fileName = path.basename(this.resourcePath);
   const hotId = JSON.stringify(`${moduleId}/${fileName}`);
 
-  return `${output} if (module.hot) require(${api}).default({ ctx: this, module: module, hotId: ${hotId} });`;
-}
+  return `${output} if (module.hot) require(${api})({ ctx: this, module: module, hotId: ${hotId} });`;
+};
