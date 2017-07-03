@@ -13,14 +13,26 @@ const IS_NATIVE_CODE_REGEXP = /\{\s*\[native code\]\s*\}/g;
 
 // Native objects aren't serializable by the 'serialize-javascript' package,
 // so we'll just transform it to strings.
-const transformUnserializableProps = (item) => {
-  if (_.isObject(item) || _.isArray(item)) {
-    return _.mapValues(item, transformUnserializableProps);
+//
+// We'll use a local cache to ignore prevent transforming cyclic objects.
+const transformUnserializableProps = (item, localCache = null) => {
+  if (localCache == null) {
+    // eslint-disable-next-line no-param-reassign
+    localCache = [];
+  } else if (_.indexOf(localCache, item) !== -1) {
+    return null;
   }
 
-  const serializedItem = item.toString();
-  if (IS_NATIVE_CODE_REGEXP.test(serializedItem)) {
-    return serializedItem;
+  if (_.isObject(item) || _.isArray(item)) {
+    localCache.push(item);
+    return _.mapValues(item, value => transformUnserializableProps(value, localCache));
+  }
+
+  if (item) {
+    const serializedItem = item.toString();
+    if (IS_NATIVE_CODE_REGEXP.test(serializedItem)) {
+      return serializedItem;
+    }
   }
 
   return item;

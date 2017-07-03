@@ -4,7 +4,8 @@
   "version": "1.1.3",
   "main": "src/index.js",
   "scripts": {
-    "test:playground": "webpack-dev-server --config tests/webpack/webpack.config.js --hot --inline"
+    "test:webpack": "webpack-dev-server --config tests/webpack/webpack.config.js --hot --inline",
+    "test:router": "webpack-dev-server --config tests/with-vue-router/webpack.config.js --hot --inline"
   },
   "keywords": [
     "webpack",
@@ -41,6 +42,7 @@
     "html-webpack-plugin": "^2.28.0",
     "vue": "^2.2.5",
     "vue-hot-reload-api": "^2.0.11",
+    "vue-router": "^2.7.0",
     "webpack": "^2.3.2",
     "webpack-dev-server": "^2.4.2"
   },
@@ -48,7 +50,7 @@
     "vue": "^2.0.0",
     "vue-hot-reload-api": "^2.0.0"
   },
-  "engines" : {
-    "node" : ">5.12"
+  "engines": {
+    "node": ">5.12"
   }
 }
