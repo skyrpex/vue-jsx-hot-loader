@@ -9,7 +9,9 @@ export default {
   render() {
     return (
       <button onClick={e => this.$emit('click', e)} disabled={this.disabled}>
-        {this.$slots.default}
+        {/* FIXME Try adding and then removing the TEST text. */}
+        {/* It won't be removed, just added as many times as you save. */}
+        {this.$slots.default} TEST
       </button>
     );
   },
