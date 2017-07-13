@@ -12,6 +12,8 @@ export default {
         {/* FIXME Try adding and then removing the TEST text. */}
         {/* It won't be removed, just added as many times as you save. */}
         {this.$slots.default} TEST
+        {/* Workaround: wrap the slot using a node like a span */}
+        {/* <span>{this.$slots.default}</span> TEST */}
       </button>
     );
   },
