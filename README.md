@@ -51,3 +51,8 @@ export default {
   },
 };
 ```
+
+## Gotchas
+
+* It only works for the default exported module (which should normally be the component itself).
+* There's a [strange behavior](https://github.com/skyrpex/vue-jsx-hot-loader/issues/14) that occurs when adding/removing/editing sibling nodes of slots. The current workaround is wrapping your slots into a div or span. If you happen to suffer from the bug, just reload your page.
