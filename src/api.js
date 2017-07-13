@@ -1,7 +1,17 @@
-const Vue = require('vue');
 const _ = require('lodash');
 const api = require('vue-hot-reload-api');
 const serialize = require('serialize-javascript');
+
+const install = _.once((Vue) => {
+  api.install(Vue, false);
+
+  // Compatibility can be checked via api.compatible after installation.
+  if (!api.compatible) {
+    throw new Error(
+      'vue-hot-reload-api is not compatible with the version of Vue you are using.',
+    );
+  }
+});
 
 // We'll store here the serialized components.
 // The cache will be used to decide whenever
@@ -49,17 +59,10 @@ const findComponent = ({ ctx, module }) => {
   return module.exports.__esModule ? module.exports.default : module.exports;
 };
 
-module.exports = ({ ctx, module, hotId }) => {
+module.exports = ({ Vue, ctx, module, hotId }) => {
   // Make the API aware of the Vue that you are using.
   // Also checks compatibility.
-  api.install(Vue, false);
-
-  // Compatibility can be checked via api.compatible after installation.
-  if (!api.compatible) {
-    throw new Error(
-      'vue-hot-reload-api is not compatible with the version of Vue you are using.',
-    );
-  }
+  install(Vue);
 
   // Accept the hot replacement.
   module.hot.accept();

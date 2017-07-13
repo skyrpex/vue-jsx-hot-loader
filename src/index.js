@@ -13,5 +13,5 @@ module.exports = function vueJsxHotLoader(output) {
   const fileName = path.basename(this.resourcePath);
   const hotId = JSON.stringify(`${moduleId}/${fileName}`);
 
-  return `${output} if (module.hot) require(${api})({ ctx: this, module: module, hotId: ${hotId} });`;
+  return `${output} if (module.hot) require(${api})({ Vue: require('vue'), ctx: this, module: module, hotId: ${hotId} });`;
 };
