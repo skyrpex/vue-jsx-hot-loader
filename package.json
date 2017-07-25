@@ -1,7 +1,7 @@
 {
   "name": "vue-jsx-hot-loader",
   "description": "Webpack loader for Vue.js components with JSX render functions",
-  "version": "1.1.5",
+  "version": "1.1.6",
   "main": "src/index.js",
   "scripts": {
     "test:webpack": "webpack-dev-server --config tests/webpack/webpack.config.js --hot --inline",
