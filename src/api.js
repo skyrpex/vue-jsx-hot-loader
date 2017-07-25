@@ -18,9 +18,6 @@ const install = _.once((Vue) => {
 // a reload or just a rerender is needed.
 const cache = {};
 
-// https://github.com/yahoo/serialize-javascript/blob/adfee60681dd02b0c4ec73793ad4bb39bbff46ef/index.js#L15
-const IS_NATIVE_CODE_REGEXP = /\{\s*\[native code\]\s*\}/g;
-
 // Native objects aren't serializable by the 'serialize-javascript' package,
 // so we'll just transform it to strings.
 //
@@ -33,16 +30,24 @@ const transformUnserializableProps = (item, localCache = null) => {
     return null;
   }
 
+  if (!item) {
+    return item;
+  }
+
+  const serializedItem = item.toString();
+  // https://github.com/yahoo/serialize-javascript/blob/adfee60681dd02b0c4ec73793ad4bb39bbff46ef/index.js#L15
+  const isNative = /\{\s*\[native code\]\s*\}/g.test(serializedItem);
+  if (isNative) {
+    return serializedItem;
+  }
+
+  if (_.isFunction(item)) {
+    return item;
+  }
+
   if (_.isObject(item) || _.isArray(item)) {
     localCache.push(item);
     return _.mapValues(item, value => transformUnserializableProps(value, localCache));
-  }
-
-  if (item) {
-    const serializedItem = item.toString();
-    if (IS_NATIVE_CODE_REGEXP.test(serializedItem)) {
-      return serializedItem;
-    }
   }
 
   return item;
@@ -70,6 +75,9 @@ module.exports = ({ Vue, ctx, module, hotId }) => {
   // Retrieve the exported component. Handle ES and CJS modules as well as
   // untransformed ES modules (env/es2015 preset with modules: false).
   const component = findComponent({ ctx, module });
+  if (!component || _.isEmpty(component)) {
+    return;
+  }
 
   // Serialize everything but the render function.
   // We'll use it to decide if we need to reload or rerender.
