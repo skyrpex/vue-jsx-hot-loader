@@ -12,7 +12,7 @@ const toString = (object) => {
 // Native objects aren't serializable by the 'serialize-javascript' package,
 // so we'll just transform it to strings.
 //
-// We'll use a local cache to ignore prevent transforming cyclic objects.
+// We'll use a local cache to prevent transforming cyclic objects.
 const transformUnserializableProps = (item, localCache = null) => {
   if (localCache == null) {
     // eslint-disable-next-line no-param-reassign
