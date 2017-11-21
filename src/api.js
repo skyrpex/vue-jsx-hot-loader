@@ -18,7 +18,7 @@ const install = _.once((Vue) => {
 // a reload or just a rerender is needed.
 const cache = {};
 
-// .toString helper, calls Object.prototype.toString as fallback
+// Not every object has .toString() method.
 const toString = (obj) => {
   if (typeof obj.toString === 'function') {
     return obj.toString();
