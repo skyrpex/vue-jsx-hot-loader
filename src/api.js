@@ -1,6 +1,6 @@
 const _ = require('lodash');
 const api = require('vue-hot-reload-api');
-const serialize = require('serialize-javascript');
+const serialize = require('./serialize');
 
 const install = _.once((Vue) => {
   api.install(Vue, false);
@@ -17,50 +17,6 @@ const install = _.once((Vue) => {
 // The cache will be used to decide whenever
 // a reload or just a rerender is needed.
 const cache = {};
-
-// Not every object has .toString() method.
-const toString = (obj) => {
-  if (typeof obj.toString === 'function') {
-    return obj.toString();
-  }
-
-  return Object.prototype.toString.call(obj);
-};
-
-// Native objects aren't serializable by the 'serialize-javascript' package,
-// so we'll just transform it to strings.
-//
-// We'll use a local cache to ignore prevent transforming cyclic objects.
-const transformUnserializableProps = (item, localCache = null) => {
-  if (localCache == null) {
-    // eslint-disable-next-line no-param-reassign
-    localCache = [];
-  } else if (_.indexOf(localCache, item) !== -1) {
-    return null;
-  }
-
-  if (!item) {
-    return item;
-  }
-
-  const serializedItem = toString(item);
-  // https://github.com/yahoo/serialize-javascript/blob/adfee60681dd02b0c4ec73793ad4bb39bbff46ef/index.js#L15
-  const isNative = /\{\s*\[native code\]\s*\}/g.test(serializedItem);
-  if (isNative) {
-    return serializedItem;
-  }
-
-  if (_.isFunction(item)) {
-    return item;
-  }
-
-  if (_.isObject(item) || _.isArray(item)) {
-    localCache.push(item);
-    return _.mapValues(item, value => transformUnserializableProps(value, localCache));
-  }
-
-  return item;
-};
 
 const findComponent = ({ ctx, module }) => {
   // Babel did not transform modules
@@ -90,10 +46,7 @@ module.exports = ({ Vue, ctx, module, hotId }) => {
 
   // Serialize everything but the render function.
   // We'll use it to decide if we need to reload or rerender.
-  const serialized = serialize(
-    transformUnserializableProps(_.omit(component, ['render'])),
-    { space: 0 },
-  );
+  const serialized = serialize(_.omit(component, ['render']));
 
   if (!module.hot.data) {
     // If no data, we need to create the record.
