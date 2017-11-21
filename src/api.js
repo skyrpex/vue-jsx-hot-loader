@@ -18,6 +18,15 @@ const install = _.once((Vue) => {
 // a reload or just a rerender is needed.
 const cache = {};
 
+// .toString helper, calls Object.prototype.toString as fallback
+const toString = (obj) => {
+  if (typeof obj.toString === 'function') {
+    return obj.toString();
+  } else {
+    return Object.prototype.toString.call(obj);
+  }
+}
+
 // Native objects aren't serializable by the 'serialize-javascript' package,
 // so we'll just transform it to strings.
 //
@@ -34,7 +43,7 @@ const transformUnserializableProps = (item, localCache = null) => {
     return item;
   }
 
-  const serializedItem = item.toString();
+  const serializedItem = toString(item);
   // https://github.com/yahoo/serialize-javascript/blob/adfee60681dd02b0c4ec73793ad4bb39bbff46ef/index.js#L15
   const isNative = /\{\s*\[native code\]\s*\}/g.test(serializedItem);
   if (isNative) {
