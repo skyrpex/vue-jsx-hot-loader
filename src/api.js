@@ -22,10 +22,10 @@ const cache = {};
 const toString = (obj) => {
   if (typeof obj.toString === 'function') {
     return obj.toString();
-  } else {
-    return Object.prototype.toString.call(obj);
   }
-}
+
+  return Object.prototype.toString.call(obj);
+};
 
 // Native objects aren't serializable by the 'serialize-javascript' package,
 // so we'll just transform it to strings.
