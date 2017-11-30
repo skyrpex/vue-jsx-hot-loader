@@ -2,7 +2,7 @@ const _ = require('lodash');
 const path = require('path');
 const hash = require('hash-sum');
 
-module.exports = function vueJsxHotLoader(output) {
+module.exports = function vueJsxHotLoader(output, sourceMap) {
   if (_.isFunction(this.cacheable)) {
     this.cacheable();
   }
@@ -13,5 +13,10 @@ module.exports = function vueJsxHotLoader(output) {
   const fileName = path.basename(this.resourcePath);
   const hotId = JSON.stringify(`${moduleId}/${fileName}`);
 
-  return `${output} if (module.hot) require(${api})({ Vue: require('vue'), ctx: this, module: module, hotId: ${hotId} });`;
+  this.callback(
+    null,
+    `${output} if (module.hot) require(${api})({ Vue: require('vue'), ctx: this, module: module, hotId: ${hotId} });`,
+    sourceMap,
+  );
+  return;
 };
