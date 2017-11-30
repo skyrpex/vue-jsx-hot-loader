@@ -1,6 +1,7 @@
 # vue-jsx-hot-loader
 
 [![Greenkeeper badge](https://badges.greenkeeper.io/skyrpex/vue-jsx-hot-loader.svg)](https://greenkeeper.io/)
+[![TravisCI Build status](https://travis-ci.org/skyrpex/vue-jsx-hot-loader.svg?branch=master)](https://travis-ci.org/skyrpex/vue-jsx-hot-loader)
 
 > Works with:
 >

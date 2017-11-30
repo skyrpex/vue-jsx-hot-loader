@@ -15,7 +15,7 @@ module.exports = function vueJsxHotLoader(output, sourceMap) {
 
   this.callback(
     null,
-    `${output} if (module.hot) require(${api})({ Vue: require('vue'), ctx: this, module: module, hotId: ${hotId} });`,
+    `${output}\n// VUE JSX HOT LOADER //\nif (module.hot) require(${api})({ Vue: require('vue'), ctx: this, module: module, hotId: ${hotId} });`,
     sourceMap,
   );
 };
