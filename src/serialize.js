@@ -46,6 +46,6 @@ const transformUnserializableProps = (item, localCache = null) => {
 };
 
 module.exports = object => serialize(
-    transformUnserializableProps(object),
-    { space: 0 },
-  );
+  transformUnserializableProps(object),
+  { space: 0 },
+);

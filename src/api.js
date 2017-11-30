@@ -7,9 +7,7 @@ const install = _.once((Vue) => {
 
   // Compatibility can be checked via api.compatible after installation.
   if (!api.compatible) {
-    throw new Error(
-      'vue-hot-reload-api is not compatible with the version of Vue you are using.',
-    );
+    throw new Error('vue-hot-reload-api is not compatible with the version of Vue you are using.');
   }
 });
 
@@ -29,7 +27,9 @@ const findComponent = ({ ctx, module }) => {
   return module.exports.__esModule ? module.exports.default : module.exports;
 };
 
-module.exports = ({ Vue, ctx, module, hotId }) => {
+module.exports = ({
+  Vue, ctx, module, hotId,
+}) => {
   // Make the API aware of the Vue that you are using.
   // Also checks compatibility.
   install(Vue);
