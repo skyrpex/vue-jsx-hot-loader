@@ -4,9 +4,7 @@
     "version": "1.3.0",
     "main": "src/index.js",
     "scripts": {
-        "test": "npm run lint && npm run jest",
-        "jest": "jest",
-        "lint": "eslint --ext js,jsx .",
+        "test": "eslint --ext js,jsx . && jest",
         "playground": "cd playground && poi --config poi.config.js"
     },
     "keywords": [
