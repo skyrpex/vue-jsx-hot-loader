@@ -21,35 +21,37 @@ This loader will enable `Hot Module Replacement` for [Webpack](http://webpack.js
 ```js
 // path/to/component.jsx
 export default {
-  render(h) {
-    return <div>
-      <p>Hello</p>
-    </div>;
-  },
+    render(h) {
+        return (
+            <div>
+                <p>Hello</p>
+            </div>
+        );
+    },
 };
 ```
 
 ```js
 // webpack.config.js
 export default {
-  // ...
-  module: {
-    loaders: [
-      // Enable HMR for JSX.
-      {
-        test: /\.jsx$/,
-        use: [
-          'babel-loader',
-          'vue-jsx-hot-loader',
+    // ...
+    module: {
+        loaders: [
+            // Enable HMR for JSX.
+            {
+                test: /\.jsx$/,
+                use: [
+                    'babel-loader',
+                    'vue-jsx-hot-loader',
+                ],
+            },
+            // Remember to use babel on the rest of the JS files.
+            {
+                test: /\.js$/,
+                use: 'babel-loader',
+            },
         ],
-      },
-      // Remember to use babel on the rest of the JS files.
-      {
-        test: /\.js$/,
-        use: 'babel-loader',
-      },
-    ],
-  },
+    },
 };
 ```
 
