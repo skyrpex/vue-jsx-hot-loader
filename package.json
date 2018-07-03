@@ -1,54 +1,52 @@
 {
-  "name": "vue-jsx-hot-loader",
-  "description": "Webpack loader for Vue.js components with JSX render functions",
-  "version": "1.3.0",
-  "main": "src/index.js",
-  "scripts": {
-    "test": "npm run lint && npm run jest",
-    "jest": "jest",
-    "lint": "eslint --ext js,jsx .",
-    "playground": "poi --config playground/poi.config.js"
-  },
-  "keywords": [
-    "webpack",
-    "vue",
-    "loader",
-    "jsx",
-    "hot"
-  ],
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/skyrpex/vue-jsx-hot-loader.git"
-  },
-  "author": "cristian@pallares.io",
+    "name": "vue-jsx-hot-loader",
+    "description": "Webpack loader for Vue.js components with JSX render functions",
+    "version": "1.3.0",
+    "main": "src/index.js",
+    "scripts": {
+        "test": "npm run lint && npm run jest",
+        "jest": "jest",
+        "lint": "eslint --ext js,jsx .",
+        "playground": "cd playground && poi --config poi.config.js"
+    },
+    "keywords": [
+        "webpack",
+        "vue",
+        "loader",
+        "jsx",
+        "hot"
+    ],
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/skyrpex/vue-jsx-hot-loader.git"
+    },
+    "author": "cristian@pallares.io",
     "license": "MIT",
     "dependencies": {
         "hash-sum": "^1.0.2",
-    "lodash": "^4.17.4",
-    "serialize-javascript": "^1.3.0"
+        "lodash": "^4.17.10",
+        "serialize-javascript": "^1.5.0"
     },
     "devDependencies": {
-    "babel-helper-vue-jsx-merge-props": "^2.0.2",
-    "babel-plugin-syntax-jsx": "^6.18.0",
-    "babel-plugin-transform-vue-jsx": "^3.5.0",
-    "babel-preset-env": "^1.6.1",
-    "eslint-config-airbnb-base": "^12.1.0",
-    "eslint-plugin-import": "^2.8.0",
-    "eslint-plugin-jest": "^21.3.2",
-    "eslint-plugin-vue": "^4.0.0-beta.0",
-    "jest": "^21.2.1",
-    "poi": "^9.5.5",
-    "vue": "^2.5.9",
-    "vue-hot-reload-api": "^2.2.4"
+        "@babel/core": "^7.0.0-beta.49",
+        "@babel/preset-env": "^7.0.0-beta.49",
+        "@babel/preset-stage-0": "^7.0.0-beta.49",
         "@skyrpex/eslint-config-base": "^1.0.0-4",
         "@skyrpex/eslint-config-jest": "^1.0.0-4",
+        "@skyrpex/eslint-config-vue": "^1.0.0-4",
+        "babel-core": "^7.0.0-bridge.0",
+        "babel-plugin-transform-vue-jsx": "^4.0.1",
         "eslint": "^5.0.1",
+        "jest": "^23.2.0",
+        "poi": "^10.2.9",
+        "vue": "^2.5.16",
+        "vue-hot-reload-api": "^2.3.0"
     },
     "peerDependencies": {
         "vue": "^2.0.0",
-    "vue-hot-reload-api": "^2.0.0"
-  },
-  "engines": {
-    "node": ">5.12"
-  }
+        "vue-hot-reload-api": "^2.0.0"
+    },
+    "engines": {
+        "node": ">5.12"
+    }
 }
