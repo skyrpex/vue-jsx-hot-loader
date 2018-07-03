@@ -36,6 +36,7 @@
         "babel-plugin-transform-vue-jsx": "^4.0.1",
         "eslint": "^4.19.1",
         "jest": "^23.2.0",
+        "np": "^3.0.4",
         "poi": "^10.2.9",
         "vue": "^2.5.16",
         "vue-hot-reload-api": "^2.3.0"
