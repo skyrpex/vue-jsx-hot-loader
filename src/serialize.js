@@ -15,7 +15,6 @@ const toString = object => {
 // We'll use a local cache to prevent transforming cyclic objects.
 const transformUnserializableProps = (item, localCache = null) => {
     if (localCache == null) {
-        // eslint-disable-next-line no-param-reassign
         localCache = [];
     } else if (_.indexOf(localCache, item) !== -1) {
         return null;

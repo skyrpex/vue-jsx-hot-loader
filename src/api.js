@@ -21,11 +21,9 @@ const cache = {};
 const findComponent = ({ ctx, module }) => {
     // Babel did not transform modules
     if (!module.exports) {
-        // eslint-disable-next-line no-underscore-dangle
         return ctx.__esModule ? ctx.default : ctx.a;
     }
 
-    // eslint-disable-next-line no-underscore-dangle
     return module.exports.__esModule ? module.exports.default : module.exports;
 };
 
