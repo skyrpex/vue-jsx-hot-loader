@@ -58,3 +58,17 @@ export default {
 ## Gotchas
 
 * It only works for the default exported module (which should normally be the component itself).
+
+## Development
+
+### Playground
+
+```bash
+npm run playground
+```
+
+### Release
+
+```bash
+npx np
+```
