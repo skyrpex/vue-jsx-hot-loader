@@ -3,6 +3,9 @@
     "description": "Webpack loader for Vue.js components with JSX render functions",
     "version": "1.3.0",
     "main": "src/index.js",
+    "files": [
+        "src"
+    ],
     "scripts": {
         "test": "eslint --ext .js,.jsx . && jest",
         "playground": "cd playground && poi --config poi.config.js"
