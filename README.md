@@ -10,8 +10,6 @@
 
 This loader will enable `Hot Module Replacement` for [Webpack](http://webpack.js.org/) when using Vue's JSX render functions.
 
-*NOTE: This plugin is still an experiment.*
-
 ## Installation
 
 `npm install vue-jsx-hot-loader`
