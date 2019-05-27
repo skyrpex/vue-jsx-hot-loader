@@ -46,6 +46,10 @@ test("serialized functions are different between each other", () => {
     expect(serialize(() => "value")).not.toBe(() => true);
 });
 
+test("serializes symbols", () => {
+    expect(serialize(Symbol("symbol"))).toBe("undefined");
+});
+
 test("serializes deep objects", () => {
     expect(
         serialize({

@@ -24,26 +24,32 @@ const transformUnserializableProps = (item, localCache = null) => {
         return item;
     }
 
-    const serializedItem = toString(item);
+    try {
+        const serializedItem = toString(item);
 
-    // https://github.com/yahoo/serialize-javascript/blob/adfee60681dd02b0c4ec73793ad4bb39bbff46ef/index.js#L15
-    const isNative = /\{\s*\[native code\]\s*\}/g.test(serializedItem);
-    if (isNative) {
-        return serializedItem;
-    }
+        // https://github.com/yahoo/serialize-javascript/blob/adfee60681dd02b0c4ec73793ad4bb39bbff46ef/index.js#L15
+        const isNative = /\{\s*\[native code\]\s*\}/g.test(serializedItem);
+        if (isNative) {
+            return serializedItem;
+        }
 
-    if (_.isFunction(item)) {
+        if (_.isFunction(item)) {
+            return item;
+        }
+
+        if ((_.isObject(item) || _.isArray(item)) && _.size(item) > 0) {
+            localCache.push(item);
+            return _.mapValues(item, value =>
+                transformUnserializableProps(value, localCache),
+            );
+        }
+
         return item;
+    } catch (error) {
+        // Sometimes, proxy objects from Vue come to the serialization
+        // and throw an error on Lodash methods. Let's just ignore those.
+        return null;
     }
-
-    if ((_.isObject(item) || _.isArray(item)) && _.size(item) > 0) {
-        localCache.push(item);
-        return _.mapValues(item, value =>
-            transformUnserializableProps(value, localCache),
-        );
-    }
-
-    return item;
 };
 
 module.exports = object =>
