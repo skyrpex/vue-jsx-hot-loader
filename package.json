@@ -1,5 +1,5 @@
 {
-    "name": "vue-jsx-hot-loader",
+    "name": "@pathed/vue-jsx-hot-loader",
     "description": "Webpack loader for Vue.js components with JSX render functions",
     "version": "1.4.3",
     "main": "src/index.js",
