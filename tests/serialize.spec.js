@@ -22,7 +22,7 @@ test("serializes strings", () => {
 });
 
 test("serializes regexps", () => {
-    expect(serialize(/abc/)).toEqual("/abc/");
+    expect(serialize(/abc/)).toEqual('new RegExp("abc", "")');
 });
 
 test("serializes dates", () => {
@@ -59,5 +59,7 @@ test("serializes deep objects", () => {
                 regexp: /regexp/,
             },
         }),
-    ).toBe('{"string":"string","nested":{"boolean":true,"regexp":/regexp/}}');
+    ).toBe(
+        '{"string":"string","nested":{"boolean":true,"regexp":new RegExp("regexp", "")}}',
+    );
 });
