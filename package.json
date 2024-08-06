@@ -1,7 +1,7 @@
 {
     "name": "vue-jsx-hot-loader",
     "description": "Webpack loader for Vue.js components with JSX render functions",
-    "version": "1.4.1",
+    "version": "1.4.2",
     "main": "src/index.js",
     "files": [
         "src"
@@ -19,14 +19,14 @@
     ],
     "repository": {
         "type": "git",
-        "url": "git+https://github.com/skyrpex/vue-jsx-hot-loader.git"
+        "url": "git+https://github.com/Grommash9/vue-jsx-hot-loader"
     },
     "author": "cristian@pallares.io",
     "license": "MIT",
     "dependencies": {
         "hash-sum": "^1.0.2",
         "lodash": "^4.17.10",
-        "serialize-javascript": "^1.5.0"
+        "serialize-javascript": "^3.1.0"
     },
     "devDependencies": {
         "@babel/core": "^7.0.0-beta.49",
