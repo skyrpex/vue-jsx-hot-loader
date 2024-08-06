@@ -1,5 +1,5 @@
 {
-    "name": "@prudnikov21/vue-jsx-hot-loader",
+    "name": "vue-jsx-hot-loader",
     "description": "Webpack loader for Vue.js components with JSX render functions",
     "version": "1.4.5",
     "main": "src/index.js",
@@ -19,7 +19,7 @@
     ],
     "repository": {
         "type": "git",
-        "url": "git+https://github.com/Grommash9/vue-jsx-hot-loader"
+        "url": "git+https://github.com/skyrpex/vue-jsx-hot-loader.git"
     },
     "author": "cristian@pallares.io",
     "license": "MIT",
